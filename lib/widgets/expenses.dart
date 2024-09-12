@@ -74,7 +74,6 @@ class _ExpensesState extends State<Expenses> {
 
     if (registeredExpenses.isNotEmpty) {
       mainContent = ExpensesList(
-        registeredExpenses,
         onRemoveExpense: removeExpense,
       );
     }

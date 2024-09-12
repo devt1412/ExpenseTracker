@@ -31,6 +31,29 @@ class Expense {
   String get formattedDate {
     return formatted.format(date);
   }
+
+  // Add these methods for database operations
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'amount': amount,
+      'date': date.toIso8601String(),
+      'category': category.toString(),
+    };
+  }
+
+  static Expense fromMap(Map<String, dynamic> map) {
+    return Expense(
+      title: map['title'],
+      amount: map['amount'],
+      date: DateTime.parse(map['date']),
+      category: Category.values.firstWhere(
+          (e) => e.toString() == map['category'],
+          orElse: () =>
+              Category.food), // Default to 'food' if category not found
+    );
+  }
 }
 
 class ExpenseBucket {
